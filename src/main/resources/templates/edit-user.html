@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit User</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+</head>
+<body>
+<h1>Edit User</h1>
+
+<form th:action="@{/user-control/edit/{id}(id=${user.id})}" method="post">
+    <!-- Отображаем ID, но не даем изменить -->
+    <label for="id">User ID:</label>
+    <input type="number" id="id" name="id" th:value="${user.id}" readonly required>
+    <br>
+
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" th:value="${user.name}" required>
+    <br>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" th:value="${user.email}" required>
+    <br>
+
+    <label for="status">Status:</label>
+    <select id="status" name="status" required>
+        <option th:each="status : ${statuses}" th:value="${status}" th:text="${status}" th:attr="selected=${status == user.status}"></option>
+    </select>
+    <br>
+
+    <button type="submit">Update User</button>
+</form>
+</body>
+</html>
